@@ -10,12 +10,18 @@ class MainViewModel(private val repository: MainRepository) : ViewModel() {
     private var _mathDouble: LiveData<Int> = Transformations.switchMap(_count) {
         repository.mathDouble(it)
     }
+    private var _mathTriple: LiveData<Int> = Transformations.map(_count) {
+        it*3
+    }
 
     val count: LiveData<Int>
         get() = _count
 
     val mathDouble: LiveData<Int>
         get() = _mathDouble
+
+    val mathTriple: LiveData<Int>
+        get() = _mathTriple
 
     fun countUp() {
         _count.value = repository.countUp(_count.value ?: 0)
