@@ -6,11 +6,11 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 
 class MainViewModel(private val repository: MainRepository) : ViewModel() {
-    private var _count: MutableLiveData<Int> = MutableLiveData()
-    private var _mathDouble: LiveData<Int> = Transformations.switchMap(_count) {
+    private val _count: MutableLiveData<Int> = MutableLiveData()
+    private val _mathDouble: LiveData<Int> = Transformations.switchMap(_count) {
         repository.mathDouble(it)
     }
-    private var _mathTriple: LiveData<Int> = Transformations.map(_count) {
+    private val _mathTriple: LiveData<Int> = Transformations.map(_count) {
         it*3
     }
 
